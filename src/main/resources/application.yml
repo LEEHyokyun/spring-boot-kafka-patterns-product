@@ -1,0 +1,82 @@
+spring:
+  application:
+    name: spring-boot-kafka-patterns-product
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3308/products #cloud-native-msa-user-mysql #Scaled out : 별도 설정
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    open-in-view: false
+    show-sql: true #SQL 실행문 로그로 기록
+    properties:
+      hibernate:
+        format_sql: true #pretty format
+        highlight_sql : true #colored
+  kafka:
+    consumer:
+      group-id: cloud-native-msa-product
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      enable-auto-commit: false # 메시지 유실 위험 존재 .. enable auto commit = false
+    listener:
+      ack-mode: manual
+server:
+  port: 60011
+
+#  kafka:
+#    consumer:
+#      group-id: cloud-native-msa-product
+#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#      enable-auto-commit: false # 메시지 유실 위험 존재 .. enable auto commit = false
+#    listener:
+#      ack-mode: manual
+#  profiles:
+#    active: dev #활성화 대상
+
+#server:
+#  port: 60002 #Spring Cloud - Eureka 기본 서버포트
+#
+#eureka:
+#  instance:
+#    hostname: localhost
+#    #hostname: localhost
+#    #prefer-ip-address: true
+#    instance-id: ${spring.application.name}
+#  client:
+#    register-with-eureka: true #Cluster 환경에서 본인의 서버 주소를 default 도메인의 다른 서버에 본인의 주소를 알림, 단일 서버에서는 false
+#    fetch-registry: true #메모리에 올려진 레지스트리 목록을 주기적으로 갱신, 클러스터 환경일 경우 true 필요
+#    service-url:
+#      defaultZone: http://127.0.0.1:8761/eureka
+#
+#spring:
+#  application:
+#    name: product-service
+#  datasource:
+#    url: jdbc:mysql://127.0.0.1:3308/products #cloud-native-msa-user-mysql
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    username: root
+#    password: root
+#  jpa:
+#    database-platform: org.hibernate.dialect.MySQLDialect
+#    open-in-view: false
+#    show-sql: true #SQL 실행문 로그로 기록
+#    properties:
+#      hibernate:
+#        format_sql: true #pretty format
+#        highlight_sql : true #colored
+#  data:
+##    mongodb:
+##      database: cyberops
+##    redis:
+##      host: localhost
+##      port: 6379
+#
+#logging:
+#  level:
+#    org.springframework.batch.item.database: DEBUG
+#
+#greeting:
+#  message: Welcome to User Micro Service.
