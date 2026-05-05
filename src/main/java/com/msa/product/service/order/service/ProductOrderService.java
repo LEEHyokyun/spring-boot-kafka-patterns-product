@@ -1,8 +1,8 @@
 package com.msa.product.service.order.service;
 
-import com.msa.product.infra.event.Event;
-import com.msa.product.infra.event.eventhandler.EventHandler;
-import com.msa.product.infra.event.payload.EventPayload;
+import com.msa.product.infra.kafka.event.Event;
+import com.msa.product.infra.kafka.event.eventhandler.EventHandler;
+import com.msa.product.infra.kafka.event.payload.EventPayload;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

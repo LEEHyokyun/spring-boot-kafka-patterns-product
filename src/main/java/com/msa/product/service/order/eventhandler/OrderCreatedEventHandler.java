@@ -1,9 +1,10 @@
 package com.msa.product.service.order.eventhandler;
 
-import com.msa.product.infra.event.Event;
-import com.msa.product.infra.event.EventType;
-import com.msa.product.infra.event.eventhandler.EventHandler;
-import com.msa.product.infra.event.payload.OrderCreatedEventPayload;
+import com.msa.product.exception.ProductNotFoundException;
+import com.msa.product.infra.kafka.event.Event;
+import com.msa.product.infra.kafka.event.EventType;
+import com.msa.product.infra.kafka.event.eventhandler.EventHandler;
+import com.msa.product.infra.kafka.event.payload.OrderCreatedEventPayload;
 import com.msa.product.model.entity.Product;
 import com.msa.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,11 @@ public class OrderCreatedEventHandler implements EventHandler<OrderCreatedEventP
         OrderCreatedEventPayload payload = event.getPayload();
 
         //entity 추출
-        Product product = productRepository.findById(payload.getProductId()).orElse(null);
+        Product product = productRepository.findById(payload.getProductId()).orElseThrow(
+                () -> new ProductNotFoundException(payload.getProductId())
+        );
+
+        //messaging
         product.updateQty(payload.getOrderedQty());
 
     }

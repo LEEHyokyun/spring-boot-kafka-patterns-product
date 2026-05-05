@@ -1,7 +1,7 @@
-package com.msa.product.infra.event;
+package com.msa.product.infra.kafka.event;
 
-import com.msa.product.infra.dataserializer.DataSerializer;
-import com.msa.product.infra.event.payload.EventPayload;
+import com.msa.product.infra.kafka.dataserializer.DataSerializer;
+import com.msa.product.infra.kafka.event.payload.EventPayload;
 import lombok.Getter;
 
 /*

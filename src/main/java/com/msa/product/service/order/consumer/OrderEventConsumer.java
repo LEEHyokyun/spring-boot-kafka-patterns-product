@@ -1,8 +1,8 @@
 package com.msa.product.service.order.consumer;
 
-import com.msa.product.infra.event.Event;
-import com.msa.product.infra.event.payload.EventPayload;
-import com.msa.product.infra.event.EventType;
+import com.msa.product.infra.kafka.event.Event;
+import com.msa.product.infra.kafka.event.payload.EventPayload;
+import com.msa.product.infra.kafka.event.EventType;
 import com.msa.product.service.ProductService;
 import com.msa.product.service.order.service.ProductOrderService;
 import lombok.RequiredArgsConstructor;

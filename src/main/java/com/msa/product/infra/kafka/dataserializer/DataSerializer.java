@@ -1,4 +1,4 @@
-package com.msa.product.infra.dataserializer;
+package com.msa.product.infra.kafka.dataserializer;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;

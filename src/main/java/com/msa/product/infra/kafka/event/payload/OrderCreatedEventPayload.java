@@ -1,6 +1,5 @@
-package com.msa.product.infra.event.payload;
+package com.msa.product.infra.kafka.event.payload;
 
-import com.msa.product.infra.event.EventType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
