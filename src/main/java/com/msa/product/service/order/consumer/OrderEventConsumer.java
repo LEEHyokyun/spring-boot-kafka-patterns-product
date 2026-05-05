@@ -8,7 +8,9 @@ import com.msa.product.service.order.service.ProductOrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.annotation.RetryableTopic;
 import org.springframework.kafka.support.Acknowledgment;
+import org.springframework.retry.annotation.Backoff;
 import org.springframework.stereotype.Component;
 
 @Slf4j
@@ -22,6 +24,10 @@ public class OrderEventConsumer {
             topics = {
                 EventType.Topic.SPRING_BOOT_KAFKA_PATTERNS_ORDER_PRODUCT
             }
+    )
+    @RetryableTopic(
+            attempts = "5",
+            backoff = @Backoff(delay = 500, multiplier = 2)
     )
     public void listen(String message, Acknowledgment ack) {
         log.info("[OrderEventConsumer.listen][INFO] received message={}", message);
