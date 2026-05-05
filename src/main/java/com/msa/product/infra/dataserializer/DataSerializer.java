@@ -24,7 +24,7 @@ public final class DataSerializer {
     //직렬화 : Object to String
     public static String serialize(Object object) {
         try {
-            return objectMapper.writeValueAsString(object); //Object(EventPayLoad Class) > String
+            return objectMapper.writeValueAsString(object); //Object(EventPayLoad Class) > Json
         } catch (JsonProcessingException e) {
             /*
              * error 발생 시 null 반환
@@ -34,21 +34,23 @@ public final class DataSerializer {
         }
     }
 
-    //역직렬화 : Object to Type
-    public static <T> T deserialize(Object data, Class<T> clazz) {
-        return objectMapper.convertValue(data, clazz);
-    }
-
-    //역직렬화 : String to Type
-    public static <T> T deserialize(String data, Class<T> clazz) {
+    //역직렬화 1차 (Json String > Object from Kafka) : JsonString to Object(EventRaw)
+    public static <T> T deserialize(String jsonData, Class<T> clazz) {
         try {
-            return objectMapper.readValue(data, clazz);
+            return objectMapper.readValue(jsonData, clazz);
         } catch (JsonProcessingException e) {
             /*
              * error 발생 시 null 반환
              * */
-            log.error("[DataSerializer.deserialize] data={}, clazz={}", data, clazz, e);
+            log.error("[DataSerializer.deserialize] jsonData={}, clazz={}", jsonData, clazz, e);
             return null;
         }
     }
+
+    //역직렬화 2차(Object Object) >  : Object to Object
+    public static <T> T deserialize(Object data, Class<T> clazz) {
+        return objectMapper.convertValue(data, clazz);
+    }
+
+
 }

@@ -36,6 +36,9 @@ public class Product {
         return product;
     }
 
+    /*
+    * product entity policy : update func in entity.
+    * */
     public void updateQty(Long orderedQty){
 
         this.productQty -= orderedQty;

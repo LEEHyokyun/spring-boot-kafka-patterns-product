@@ -22,8 +22,12 @@ public class Event<T extends EventPayload> {
     }
 
     //Kafka 통신을 위한 역직렬화 : Json > Event
-    public static Event<EventPayload> fromJson(String json){
-        EventRaw eventRaw = DataSerializer.deserialize(json, EventRaw.class);
+    public static Event<EventPayload> fromJsonStringData(String jsonStringData){
+        /*
+        * 애초에 json 형태로 변경하여 보냈으므로,
+        * Producer 측에서 포맷을 잘 맞춰서 보내었다면 오류 확률은 0.
+        * */
+        EventRaw eventRaw = DataSerializer.deserialize(jsonStringData, EventRaw.class);
 
         if(eventRaw == null){
             return null;
@@ -31,6 +35,10 @@ public class Event<T extends EventPayload> {
 
         Event<EventPayload> event = new Event<>();
         event.eventType = EventType.from(eventRaw.getEventType());
+        /*
+        * key point : eventRaw payload(Kafka로부터 1차 역직렬화한 payload)를
+        * eventType의 payloadClass 로 정의된 Object 형태로 최종 역직렬화한다.
+        * */
         event.payload = DataSerializer.deserialize(eventRaw.getPayload(), event.eventType.getPayloadClass());
 
         return event;

@@ -1,6 +1,7 @@
 package com.msa.product.controller;
 
 import com.msa.product.model.request.ProductCreateRequest;
+import com.msa.product.model.response.ProductListResponse;
 import com.msa.product.model.response.ProductResponse;
 import com.msa.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,7 @@ import java.util.List;
 * - Response Object는 처리 시 활용한 객체 상태/값들을 보여주는 목적으로 분리하지 않고 일괄 운용
 * */
 @RestController
-@RequestMapping("/")
+@RequestMapping("/product")
 @RequiredArgsConstructor
 public class ProductController {
 
@@ -29,27 +30,21 @@ public class ProductController {
     }
 
     @GetMapping("/products")
-    public ResponseEntity<List<ProductResponse>> readAllProducts(){
+    public ProductListResponse readAllProducts(){
 
-        List<ProductResponse> list = productService.readAllProducts();
-
-        return ResponseEntity.status(HttpStatus.OK).body(list);
+        return productService.readAllProducts();
     }
 
     @GetMapping("/products/{productId}")
-    public ResponseEntity<ProductResponse> readProduct(@PathVariable("productId") Long userId){
+    public ProductResponse readProduct(@PathVariable("productId") Long userId){
 
-        ProductResponse productResponse = productService.readProduct(userId);
-
-        return ResponseEntity.status(HttpStatus.OK).body(productResponse);
+        return productService.readProduct(userId);
     }
 
     @PostMapping("/products")
-    public ResponseEntity<ProductResponse> create(@RequestBody ProductCreateRequest request){
+    public ProductResponse create(@RequestBody ProductCreateRequest request){
 
-        ProductResponse productResponse = productService.create(request);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(productResponse);
+        return productService.create(request);
     }
 
 }

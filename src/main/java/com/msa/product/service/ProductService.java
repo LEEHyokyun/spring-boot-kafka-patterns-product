@@ -4,6 +4,7 @@ import com.msa.product.infra.event.Event;
 import com.msa.product.infra.event.payload.EventPayload;
 import com.msa.product.model.entity.Product;
 import com.msa.product.model.request.ProductCreateRequest;
+import com.msa.product.model.response.ProductListResponse;
 import com.msa.product.model.response.ProductResponse;
 import com.msa.product.repository.ProductRepository;
 import com.msa.product.infra.event.eventhandler.EventHandler;
@@ -38,6 +39,9 @@ public class ProductService {
 
         productRepository.save(product);
 
+        /*
+        * created product
+        * */
         return ProductResponse.from(product);
     }
 
@@ -45,10 +49,10 @@ public class ProductService {
         return ProductResponse.from(productRepository.findById(productId).orElse(null));
     }
 
-    public List<ProductResponse> readAllProducts() {
-        return productRepository.findAll().stream()
-                .map(ProductResponse::from)//Entity > Dto
-                .toList();
+    public ProductListResponse readAllProducts() {
+        return ProductListResponse.from(
+                productRepository.findAll()
+        );
     }
 
     @Transactional

@@ -6,6 +6,7 @@ import com.msa.product.infra.event.EventType;
 import com.msa.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.stereotype.Component;
@@ -16,12 +17,14 @@ import org.springframework.stereotype.Component;
 public class OrderEventConsumer {
     private final ProductService productService;
 
-    @KafkaListener(topics = {
-            EventType.Topic.CLOUD_NATIVE_MSA_ORDER
-    })
+    @KafkaListener(
+            topics = {
+                EventType.Topic.SPRING_BOOT_KAFKA_PATTERNS_ORDER_PRODUCT
+            }
+    )
     public void listen(String message, Acknowledgment ack) {
-        log.info("[INFO][OrderEventConsumer.listen] received message={}", message);
-        Event<EventPayload> event = Event.fromJson(message);
+        log.info("[OrderEventConsumer.listen][INFO] received message={}", message);
+        Event<EventPayload> event = Event.fromJsonStringData(message);
 
         if(event != null){
             productService.orderProducts(event);

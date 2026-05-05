@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @Getter
 @RequiredArgsConstructor
 public enum EventType {
-    ORDER_CREATED(OrderCreatedEventPayload.class, Topic.CLOUD_NATIVE_MSA_ORDER)
+    ORDER_CREATED(OrderCreatedEventPayload.class, Topic.SPRING_BOOT_KAFKA_PATTERNS_ORDER_PRODUCT)
     ;
 
     private final Class<? extends EventPayload> payloadClass;
@@ -31,6 +31,6 @@ public enum EventType {
     }
 
     public static class Topic {
-        public static final String CLOUD_NATIVE_MSA_ORDER = "CLOUD-NATIVE-MSA-ORDER";
+        public static final String SPRING_BOOT_KAFKA_PATTERNS_ORDER_PRODUCT = "ORDER.CREATED";
     }
 }
