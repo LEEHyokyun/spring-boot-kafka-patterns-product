@@ -10,8 +10,10 @@
 > System
 ![img_7.png](img_7.png)
 
+
 > SAGA
 ![img_5.png](img_5.png)
+
 
 > Consumer 
 ![img_6.png](img_6.png)
@@ -25,3 +27,9 @@
 | spring-boot-kakfa-patterns-kafka         | 9092      | Kafka |
 | spring-boot-kafka-patterns-mysql-order   | 3307      | Order DB |
 | spring-boot-kafka-patterns-mysql-product | 3308      | Product DB |
+
+## 3. Additional KeyPoints
+
+- JPA : Entity Graph
+
+![img_8.png](img_8.png)
