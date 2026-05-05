@@ -1,12 +1,12 @@
-package com.msa.product.infra.consumer;
+package com.msa.product.service.order.consumer;
 
 import com.msa.product.infra.event.Event;
 import com.msa.product.infra.event.payload.EventPayload;
 import com.msa.product.infra.event.EventType;
 import com.msa.product.service.ProductService;
+import com.msa.product.service.order.service.ProductOrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.stereotype.Component;
@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class OrderEventConsumer {
     private final ProductService productService;
+    private final ProductOrderService productOrderService;
 
     @KafkaListener(
             topics = {
@@ -27,7 +28,7 @@ public class OrderEventConsumer {
         Event<EventPayload> event = Event.fromJsonStringData(message);
 
         if(event != null){
-            productService.orderProducts(event);
+            productOrderService.orderProducts(event);
         }
 
         /*

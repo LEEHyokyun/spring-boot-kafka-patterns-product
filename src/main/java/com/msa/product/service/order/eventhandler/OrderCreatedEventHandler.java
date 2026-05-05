@@ -1,4 +1,4 @@
-package com.msa.product.service.eventhandler;
+package com.msa.product.service.order.eventhandler;
 
 import com.msa.product.infra.event.Event;
 import com.msa.product.infra.event.EventType;
