@@ -13,7 +13,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class ProductOrderService {
+public class ProductOrderDLTService {
 
     /*
      * 이벤트핸들러(List)

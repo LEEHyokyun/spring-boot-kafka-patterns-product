@@ -1,4 +1,4 @@
-package com.msa.product.infra.kafka.event.eventhandler;
+package com.msa.product.service.eventhandler;
 
 import com.msa.product.infra.kafka.event.Event;
 import com.msa.product.infra.kafka.event.payload.EventPayload;

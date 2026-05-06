@@ -5,6 +5,7 @@ import com.msa.product.infra.kafka.event.payload.OrderCreatedEventPayload;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.annotation.Order;
 
 /*
  * Event Type에 대한 정의
@@ -15,7 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 @Getter
 @RequiredArgsConstructor
 public enum EventType {
-    ORDER_CREATED(OrderCreatedEventPayload.class, Topic.SPRING_BOOT_KAFKA_PATTERNS_ORDER_PRODUCT)
+    ORDER_CREATED(OrderCreatedEventPayload.class, Topic.SPRING_BOOT_KAFKA_PATTERNS_ORDER_PRODUCT),
+    ORDER_CREATED_DLT(OrderCreatedEventPayload.class, Topic.SPRING_BOOT_KAFKA_PATTERNS_ORDER_CREATED_DLT)
     ;
 
     private final Class<? extends EventPayload> payloadClass;
@@ -32,5 +34,6 @@ public enum EventType {
 
     public static class Topic {
         public static final String SPRING_BOOT_KAFKA_PATTERNS_ORDER_PRODUCT = "ORDER.CREATED";
+        public static final String SPRING_BOOT_KAFKA_PATTERNS_ORDER_CREATED_DLT = "ORDER.CREATED.DLT";
     }
 }

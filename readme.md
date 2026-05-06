@@ -46,6 +46,18 @@
 
 구체적인 재시도 정책이 정립될 경우, 더이상 무의미한 재시도를 시도하지 않고 DLT로 전송(send to DLT),
 
+> 사후 DLT 처리방안은 별도 구현이 필요하다.
+- 사후처리가 유의미할 경우(일시적인 장애 및 통신오류 등) 기존 토픽에 재전송
+- 사후처리가 무의미할 경우 메시지를 폐기 처분
+  - DLT는 보통 처리 트래픽이 몰리지 않는 시간에 배치 등을 통해 별도 처리하며, 이는 시스템 상 자원을 필요로 하는 소모이다.
+  - Producer 측의 필터 로직이 존재한다면 좋을 것.
+
+``
+2026-05-06T16:42:13.686+09:00  INFO 3004 --- [spring-boot-kafka-patterns-product] [ntainer#1-0-C-1] o.a.k.c.c.i.ClassicKafkaConsumer         : [Consumer clientId=consumer-spring-boot-kafka-patterns-product-dlt-7, groupId=spring-boot-kafka-patterns-product-dlt] Seeking to offset 2 for partition ORDER.CREATED.DLT-0
+``
+
+dlt 토픽에 메시지가 쌓이면, 메시지를 처리하기 위해 처리 가능(Listener)
+
 ## 4. Additional KeyPoints
 
 - JPA : Entity Graph
