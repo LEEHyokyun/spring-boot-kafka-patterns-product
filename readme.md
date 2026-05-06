@@ -58,6 +58,17 @@
 
 dlt 토픽에 메시지가 쌓이면, 메시지를 처리하기 위해 처리 가능(Listener)
 
+## 3-2. Kafka Broker로의 메시지 발행 실패(Kafka 통신 오류 등 치명적 오류에 대한 대응책)
+
+> outbox pattern
+- consumer 측의 메시지 처리와는 상관없이 producer의 연산, 메시지 발행 오류 상태에 대한 문제
+- 데이터 정합성을 저해할 수 있기에 이에 대한 대응책 필요
+
+![img_9.png](img_9.png)
+
+- 트랜잭션 레벨에서, 처리 후 바로 메시지 전송이 아닌 outbox에 보관
+- 이후 outbox에서 페이로드를 읽고 메시지를 전송, 메시지 유실 방지 및 데이터 정합성을 확보하는 것이 핵심
+
 ## 4. Additional KeyPoints
 
 - JPA : Entity Graph
