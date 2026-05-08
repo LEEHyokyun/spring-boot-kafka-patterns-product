@@ -57,7 +57,6 @@
 | Polling 기반 재전송   | 실행 방식                           | Single Thread                                           | 순차 처리           | 중복 Polling 방지                  |
 | Polling 기반 재전송   | 목적                              | 장애 복구                                                   | Kafka 발행 실패 보완  | Eventually Consistent 보장       |
 
-
 ## 4. Trouble Shootings
 
 > Kafka의 메시지 유실 상황에 대한 대응 방안

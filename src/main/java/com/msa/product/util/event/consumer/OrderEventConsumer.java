@@ -1,7 +1,7 @@
-package com.msa.product.service.order.consumer;
+package com.msa.product.util.event.consumer;
 
 import com.msa.product.infra.kafka.event.Event;
-import com.msa.product.infra.kafka.event.payload.EventPayload;
+import com.msa.product.util.event.payload.EventPayload;
 import com.msa.product.infra.kafka.event.EventType;
 import com.msa.product.service.ProductService;
 import com.msa.product.service.order.service.ProductOrderDLTService;
@@ -37,7 +37,7 @@ public class OrderEventConsumer {
             * */
             dltTopicSuffix = ".DLT"
     )
-    public void listen1(String message, Acknowledgment ack) {
+    public void kafkaListen(String message, Acknowledgment ack) {
         log.info("[OrderEventConsumer.listen][INFO] received message={}", message);
         Event<EventPayload> event = Event.fromJsonStringData(message);
 
@@ -59,12 +59,12 @@ public class OrderEventConsumer {
             },
             groupId = DLT_GROUP_ID
     )
-    public void listen2(String message, Acknowledgment ack){
+    public void kafkaDLTListen(String message, Acknowledgment ack){
         log.info("[OrderEventConsumer.listen][INFO] received dlt message={}", message);
         Event<EventPayload> event = Event.fromJsonStringData(message);
 
         if(event != null){
-            productOrderDLTService.orderProducts(event);
+            //productOrderDLTService.orderProducts(event);
         }
 
         /*

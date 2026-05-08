@@ -1,10 +1,9 @@
-package com.msa.product.service.order.eventhandler;
+package com.msa.product.util.event.handler;
 
 import com.msa.product.exception.ProductNotFoundException;
 import com.msa.product.infra.kafka.event.Event;
 import com.msa.product.infra.kafka.event.EventType;
-import com.msa.product.service.eventhandler.EventHandler;
-import com.msa.product.infra.kafka.event.payload.OrderCreatedEventPayload;
+import com.msa.product.util.event.payload.OrderCreatedEventPayload;
 import com.msa.product.model.entity.Product;
 import com.msa.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;

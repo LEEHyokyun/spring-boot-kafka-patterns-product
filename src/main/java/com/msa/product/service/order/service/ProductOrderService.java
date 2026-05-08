@@ -1,8 +1,9 @@
 package com.msa.product.service.order.service;
 
 import com.msa.product.infra.kafka.event.Event;
-import com.msa.product.service.eventhandler.EventHandler;
-import com.msa.product.infra.kafka.event.payload.EventPayload;
+import com.msa.product.util.event.handler.EventHandler;
+import com.msa.product.util.event.payload.EventPayload;
+import com.msa.product.util.idempotency.handler.IdempotencyHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,21 +22,43 @@ public class ProductOrderService {
      * 참고로 Spring Framework에 의해 해당 리스트의 생성자 주입 시점에 해당 구현체들이 주입되어 할당됨
      * */
     private final List<EventHandler> eventHandlers;
+    private final List<IdempotencyHandler> idempotencyHandlers;
+
+    /*
+    * 멱등성보장에 대한 핸들러
+    * */
 
     @Transactional
     public void orderProducts(Event<EventPayload> event){
         EventHandler<EventPayload> eventHandler = findEventHandler(event);
+        IdempotencyHandler<EventPayload> idempotencyHandler = findIdempotencyHandler(event);
 
         if(eventHandler == null){
             log.error("[ERROR][ProductService] No Such EventHandler found");
             return;
         }
 
+        if(idempotencyHandler == null){
+            log.error("[ERROR][ProductService] No Such IdempotencyHandler found");
+            return;
+        }
+
         eventHandler.handle(event);
+        idempotencyHandler.handle(event);
     }
 
     private EventHandler<EventPayload> findEventHandler(Event<EventPayload> event) {
         return eventHandlers.stream()
+                .filter(eventHandler -> eventHandler.supports(event))
+                .findAny()
+                /*
+                 * Wrapper -> Object
+                 * */
+                .orElse(null);
+    }
+
+    private IdempotencyHandler<EventPayload> findIdempotencyHandler(Event<EventPayload> event) {
+        return idempotencyHandlers.stream()
                 .filter(eventHandler -> eventHandler.supports(event))
                 .findAny()
                 /*

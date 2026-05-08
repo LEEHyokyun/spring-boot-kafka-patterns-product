@@ -1,7 +1,7 @@
-package com.msa.product.service.eventhandler;
+package com.msa.product.util.event.handler;
 
 import com.msa.product.infra.kafka.event.Event;
-import com.msa.product.infra.kafka.event.payload.EventPayload;
+import com.msa.product.util.event.payload.EventPayload;
 
 /*
  * Event가 발생하여 Listener에서 이를 읽고 처리하기 위한 핸들러

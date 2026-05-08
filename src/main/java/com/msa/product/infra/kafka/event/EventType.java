@@ -1,11 +1,10 @@
 package com.msa.product.infra.kafka.event;
 
-import com.msa.product.infra.kafka.event.payload.EventPayload;
-import com.msa.product.infra.kafka.event.payload.OrderCreatedEventPayload;
+import com.msa.product.util.event.payload.EventPayload;
+import com.msa.product.util.event.payload.OrderCreatedEventPayload;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.annotation.Order;
 
 /*
  * Event Type에 대한 정의
