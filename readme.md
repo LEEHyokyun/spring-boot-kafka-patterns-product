@@ -99,24 +99,21 @@ dlt 토픽에 메시지가 쌓이면, 메시지를 처리하기 위해 처리 �
 - 이후 outbox에서 페이로드를 읽고 메시지를 전송, 메시지 유실 방지 및 데이터 정합성을 확보하는 것이 핵심
 - 많은 트래픽 요청으로 인해 commit 이후의 메시지 전송 유실 시, polling을 통해 미전송 내역 처리.
 
-## 4-3. 멱등성 보장
+## 5. 멱등성 보장
 
 > 의도치 않은 중복 요청에 대한 상태 보장
 - 동일한 요청을 중복 요청하거나, 의도치 않게 Consumer 처리 후 메시지 유실하여 동일한 메시지에 대해 재시도를 할 경우
 - 중복처리가 아닌 1번의 처리를 보장하기 위한 멱등성 보장 처리가 필요하다.
 
-## 5. Additional KeyPoints
+![img_8.png](img_8.png)
+
+> 멱등성 보장 설계 과정 : [개인 벨로그에 자세히 기술](https://velog.io/@gyrbs22/%EB%B0%B1%EC%97%94%EB%93%9C-Road-To-MSA-5-Kafka-Patterns-%EB%B6%84%EC%82%B0-%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%9D%98-%EB%A9%94%EC%8B%9C%EC%A7%95-%EC%B2%98%EB%A6%AC-%EC%8B%A4%ED%8C%A8-%EC%83%81%ED%99%A9%EC%97%90-%EB%8C%80%ED%95%9C-Trouble-ShootingsDLTRetryOutbox-%EB%B0%8F-%EB%A9%B1%EB%93%B1%EC%84%B1-%EB%B3%B4%EC%9E%A5-%EC%A0%84%EB%9E%B5)
+
+> 멱등성 보장 동작 과정
+![img_10.png](img_10.png)
+
+## 6. Additional Keypoints
 
 > 관계 기반의 트랜잭션
 
 - JPA : Entity Graph
-
-![img_8.png](img_8.png)
-
-> 멱등성 보장 설계 과정
-
-[개인 벨로그에 자세히 기술](https://velog.io/@gyrbs22/%EB%B0%B1%EC%97%94%EB%93%9C-Road-To-MSA-5-Kafka-Patterns-%EB%B6%84%EC%82%B0-%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%9D%98-%EB%A9%94%EC%8B%9C%EC%A7%95-%EC%B2%98%EB%A6%AC-%EC%8B%A4%ED%8C%A8-%EC%83%81%ED%99%A9%EC%97%90-%EB%8C%80%ED%95%9C-Trouble-ShootingsDLTRetryOutbox-%EB%B0%8F-%EB%A9%B1%EB%93%B1%EC%84%B1-%EB%B3%B4%EC%9E%A5-%EC%A0%84%EB%9E%B5)
-
-> 멱등성 보장 동작 과정
-
-![img_10.png](img_10.png)
