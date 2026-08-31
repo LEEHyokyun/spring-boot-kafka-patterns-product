@@ -1,11 +1,12 @@
-## 1.  개요
+## 1. Project 개요
 
-> 분산환경에서 Kafka 활용 시 발생가능한 다양한 문제상황을 가정하고 이를 Trouble Shooting.
+본 Trouble Shootings은 대규모 트래픽을 도메인 분리 및 분산 환경 구성을 통해 구조적 개선 및 성능 개선을 확보할 수 있는 요건을 살펴본다.
 
-- Java ver 21.
-- Spring Boot ver 3.5.0 / Spring Cloud 2025.0.x Northfields
-- apache/Kafka 3.8.0
-- MySQL 8.0.42
+- 기존 구성한 Order 도메인(Monolithic)의 트래픽이 집중되어, 단일 규모의 상태 및 데이터 관리가 어려울때 어떤 설계를 적용할 수 있는가?
+- 분산 환경을 활용하여 비동기 메시징 체계에서의 트랜잭션 정합성을 유지하기 위한 방안은 무엇이 있을까?
+
+도매인을 분리하여 트래픽을 분리하고, 실제 MSA 구동 환경을 가정하여 서비스를 운영하기 위해 각 마이크로서비스의 설계 방안을 살펴본다.<br/>
+현재 구성한 프로젝트의 중요 요소(Order/Product 도메인의 분리 운영/비동기 메시징 체계로 이어지는 SAGA Pattern/Kafka 모듈을 OCP 기반에 근거하여 아키텍칭하는 방안)에 대해 하기와 같이 간략히 정리한다.
 
 > System
 ![img_7.png](img_7.png)
