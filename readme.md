@@ -8,6 +8,10 @@
 - [MSA 시리즈 #7](https://velog.io/@gyrbs22/%EB%B0%B1%EC%97%94%EB%93%9C-Road-To-MSA-7-Kafka-Patterns-%EB%B6%84%EC%82%B0-%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%9D%98-%EB%A9%94%EC%8B%9C%EC%A7%95-%EC%B2%98%EB%A6%AC-%EC%8B%A4%ED%8C%A8-%EC%83%81%ED%99%A9%EC%97%90-%EB%8C%80%ED%95%9C-Trouble-ShootingsDLTRetryOutbox-%EB%B0%8F-%EB%A9%B1%EB%93%B1%EC%84%B1-%EB%B3%B4%EC%9E%A5-%EC%A0%84%EB%9E%B5)
 - [MSA 시리즈 #8](https://velog.io/@gyrbs22/%EB%B0%B1%EC%97%94%EB%93%9C-Road-To-MSA-8-Kafka-Patterns-%EB%B6%84%EC%82%B0-%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%9D%98-%EB%A9%94%EC%8B%9C%EC%A7%95-%EC%B2%98%EB%A6%AC-%EC%8B%A4%ED%8C%A8-%EC%83%81%ED%99%A9%EC%97%90-%EB%8C%80%ED%95%9C-Trouble-ShootingsOutbox-%EB%B0%8F-%EB%A9%B1%EB%93%B1%EC%84%B1-%EB%B3%B4%EC%9E%A5-%EC%A0%84%EB%9E%B5)
 
+**Kafka 체계에서의 데이터 정합성 및 멱등성 확보 방안 검증을 위한 MSA 프로젝트 구성**
+- [MSA - 주문 도메인](https://github.com/LEEHyokyun/spring-boot-kafka-patterns-order)
+- [MSA - Outbox Relay 모듈 적용한 주문 도메인](https://github.com/LEEHyokyun/spring-boot-kafka-patterns-order-with-message-relay-module/tree/master/spring-boot-kafka-patterns-order)
+
 ## 1. Project 개요
 
 본 Trouble Shootings은 대규모 트래픽을 도메인 분리 및 분산 환경 구성을 통해 구조적 개선 및 성능 개선을 확보할 수 있는 요건을 살펴본다.
@@ -20,14 +24,15 @@
 현재 구성한 프로젝트의 중요 요소(Order/Product 도메인의 분리 운영/비동기 메시징 체계로 이어지는 SAGA Pattern/Kafka 모듈을 OCP 기반에 근거하여 아키텍칭하는 방안)에 대해 하기와 같이 간략히 정리한다.
 
 > System
+
 ![img_7.png](img_7.png)
 
-
 > SAGA
+
 ![img_5.png](img_5.png)
 
-
 > Consumer 
+
 ![img_6.png](img_6.png)
 
 ## 2. WAS Configs
